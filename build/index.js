@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const account_1 = require("./routes/account");
+const account_1 = require("./src/routes/account");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;

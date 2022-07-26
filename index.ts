@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import mongoose from 'mongoose'
 import dotenv from 'dotenv';
-import {accountRouter} from './routes/account'
+import {accountRouter} from './src/routes/account'
 dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
