@@ -1,28 +1,31 @@
-import express, {Request, Response} from 'express'
+import express, { Request, Response } from 'express'
 
-import { createAccount,findAccount } from '../controllers/account'
+import { createAccount, depositBalance, findAccount } from '../controllers/account'
 const router = express.Router()
 
-router.get('/api/account/',(req:Request,res:Response)=>{
-    createAccount("6576805e-af57-4158-ba05-6ec174de200b")
-    return res.send('una respuesta')
+router.post('/api/createAccount/:id', (req: Request, res: Response) => {
+    createAccount(req.params.id)
+    return res.send('Cuenta creada')
 })
 
-router.post('/api/account', (req:Request,res:Response)=>{
-    
-    return res.send('otra respuesta')
-})
 
-router.put('/api/widthdrawBalance',(req:Request,res:Response)=>{
+router.put('/api/account/widthdrawBalance', (req: Request, res: Response) => {
     return res.send('Retiro exitoso')
 })
 
-router.put('/api/depositBalance',(req:Request,res:Response)=>{
-    return res.send('Deposito exitoso')
+router.put('/api/account/depositBalance', async (req: Request, res: Response) => {
+    const body = req.body;
+    const response = await depositBalance(body)
+
+    if (response) {
+        return res.send({status: 'OK', message: 'Balance Actualizado. Saldo Añadido.'})
+    } else {
+        return res.send({status: 'NO OK', message: 'Mano revisa eso'})
+    }
 })
 
-router.get('/api/account/:id',(req:Request,res:Response)=>{
-    findAccount(req.params.id)
-    return res.send('algo')
+router.get('/api/account/:id', async (req: Request, res: Response) => {
+    const respuesta = await findAccount(req.params.id)
+    return res.send(respuesta)
 })
-export{router as accountRouter}
+export { router as accountRouter }

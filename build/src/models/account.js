@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Account = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const accountSchema = new mongoose_1.default.Schema({
-    userId: {
-        type: String,
+    _id: {
+        type: "ObjectId",
         required: true,
-        maxlength: 60
+        unique: true,
     },
     accounts: [
         {
@@ -21,7 +21,7 @@ const accountSchema = new mongoose_1.default.Schema({
                 type: Number,
                 required: true
             }
-        },
+        }
     ]
 });
 const Account = mongoose_1.default.model('Account', accountSchema);

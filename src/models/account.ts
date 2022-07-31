@@ -1,10 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Types } from 'mongoose'
+
 
 const accountSchema = new mongoose.Schema({
-    userId:{
-        type: String,
+    _id:{
+        type: "ObjectId",
         required: true,
-        maxlength: 60 
+        unique:true,
     },
     accounts: [
         {
@@ -13,10 +14,10 @@ const accountSchema = new mongoose.Schema({
                 required: true
             },
             balance: {
-                type:Number,
+                type: Number,
                 required:true
             }
-        },
+        }
     ]
 })
 const Account=mongoose.model('Account', accountSchema)

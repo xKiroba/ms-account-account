@@ -7,9 +7,12 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const account_1 = require("./src/routes/account");
+const body_parser_1 = __importDefault(require("body-parser"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(account_1.accountRouter);
 mongoose_1.default.connect('mongodb://localhost:27017/accounts', {}, () => {
     console.log('Ta conectao viteh');
